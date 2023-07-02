@@ -1,11 +1,11 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Rate {
-	
+
 	public function __construct()
 	{
 		$this->ci =& get_instance();
-		
+
 		$this->ci->load->model('Rate_plan_model');
 		$this->ci->load->model('Rate_model');
 	}
@@ -13,7 +13,7 @@ class Rate {
 	function get_rate_array($rate_plan_id, $date_start, $date_end, $adult_count, $children_count)
 	{
 		$rate_array = $this->ci->Rate_model->get_daily_rates($rate_plan_id, $date_start, $date_end);
-		
+
 		foreach ($rate_array as $index => $rate)
 		{
 			if ($adult_count == '1')
@@ -37,7 +37,7 @@ class Rate {
 
 		return $rate_array;
 	}
-	
+
 	function get_average_daily_rate($rates)
 	{
 		$rate_total = 0;
@@ -45,8 +45,8 @@ class Rate {
 		{
 			$rate_total += $rate['rate'];
 		}
-		
-		return $rate_total/count($rates);
+
+		return $rates ? $rate_total/count($rates) : 0;
 	}
-	
+
 }
